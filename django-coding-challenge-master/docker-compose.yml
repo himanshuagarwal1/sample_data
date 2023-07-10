@@ -1,0 +1,21 @@
+services:
+  license-server:
+    build:
+      context: ./license_portal
+    links:
+      - postgres
+    volumes:
+      - ./license_portal:/app
+    ports:
+      - 8080:80
+    command: python manage.py runserver 0.0.0.0:80
+    
+    
+
+  postgres:
+    image: 'postgres:13'
+    environment:
+     POSTGRES_USER: 'licenses'
+     POSTGRES_PASSWORD: 'licenses'
+     POSTGRES_DB: 'licenses'
+    
